@@ -1,4 +1,4 @@
-# DocumentationSpringDataJpa
+# Documentation on SpringDataJpa
 This is a documentation to understand Spring Data Jpa.
 
 Spring Data JPA is a part of the larger Spring Data family, which aims to simplify the development of data access layers in Java applications. It builds on top of the Java Persistence API (JPA) and offers a higher-level abstraction for interacting with databases, reducing boilerplate code and enhancing productivity.
