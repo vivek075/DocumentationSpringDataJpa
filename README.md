@@ -118,9 +118,9 @@ This instance encapsulates the metadata about the query, such as the JPQL/SQL st
 
 _Query Creation_:
 
-For JPQL, a Query object is created via `EntityManager.createQuery()`.
+For JPQL, a `Query` object is created via `EntityManager.createQuery()`.
 
-For native SQL, a NativeQuery object is created via `EntityManager.createNativeQuery()`.
+For native SQL, a `NativeQuery` object is created via `EntityManager.createNativeQuery()`.
 
 _Parameter Binding_:
 
