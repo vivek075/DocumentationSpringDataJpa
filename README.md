@@ -124,7 +124,7 @@ For native SQL, a `NativeQuery` object is created via `EntityManager.createNativ
 
 _Parameter Binding_:
 
-The parameters are bound to the query using the names provided in the @Param annotations or positionally if no @Param annotations are used.
+The parameters are bound to the query using the names provided in the @Param annotations or positionally if no `@Param` annotations are used.
 
 _Execution and Result Mapping_:
 
