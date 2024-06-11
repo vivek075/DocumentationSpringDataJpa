@@ -57,3 +57,75 @@ _Auditing_:
 Spring Data JPA supports auditing features such as tracking entity creation and modification timestamps, as well as the user who made the changes. This is achieved through annotations like `@CreatedDate`, `@LastModifiedDate`, and `@CreatedBy`.
 
 Spring Data JPA abstracts much of the complexity involved in data access, allowing developers to focus on business logic. By handling boilerplate code for CRUD operations, query generation, and transaction management, it streamlines the process of interacting with databases and ensures consistency and maintainability in Java applications.
+
+In Spring Data JPA, the `@Query` annotation is used to define custom `JPQL` (Java Persistence Query Language) or `native SQL` queries directly on repository methods. This is especially useful when the method name query derivation isn't sufficient for your needs.
+
+Here's an example of how to use the `@Query` annotation in a Spring Data JPA repository and a brief explanation of its internal working:
+
+````
+@Entity
+public class Employee {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String firstName;
+    private String lastName;
+    private String department;
+
+    // Getters and setters
+}
+````
+We want to create a repository that can find employees by their department using a custom JPQL query.
+
+````
+public interface EmployeeRepository extends JpaRepository<Employee, Long> {
+
+    // Custom JPQL query
+    @Query("SELECT e FROM Employee e WHERE e.department = :department")
+    List<Employee> findEmployeesByDepartment(@Param("department") String department);
+
+    // Native SQL query
+    @Query(value = "SELECT * FROM Employee e WHERE e.department = :department", nativeQuery = true)
+    List<Employee> findEmployeesByDepartmentNative(@Param("department") String department);
+}
+````
+
+**How It Works Internally**
+_Annotation Parsing_: When Spring Data JPA initializes the EmployeeRepository bean, it scans for repository interfaces and detects methods annotated with @Query.
+
+_Query Translation_:
+
+  JPQL Query: If the `@Query` annotation contains a JPQL statement, Spring Data JPA uses the EntityManager to create a TypedQuery based on the provided JPQL.
+  
+  Native SQL Query: If the `@Query` annotation has nativeQuery set to true, Spring Data JPA uses the EntityManager to create a NativeQuery.
+
+_Parameter Binding_: The parameters provided to the method are bound to the query placeholders. The `@Param` annotation is used to map method parameters to named parameters in the query.
+
+_Query Execution_: The query is executed, and the result is returned. The result is automatically mapped to the domain model (in this case, the `Employee` entity).
+
+**Internals of Query Execution**
+
+Spring Data JPA leverages the underlying JPA provider (like Hibernate) to handle the actual query execution. The high-level flow looks like this:
+
+_Query Preparation_:
+
+The repository infrastructure creates a QueryMethod instance for each method annotated with `@Query`.
+This instance encapsulates the metadata about the query, such as the JPQL/SQL string, method parameters, and return type.
+
+
+_Query Creation_:
+
+For JPQL, a Query object is created via `EntityManager.createQuery()`.
+
+For native SQL, a NativeQuery object is created via `EntityManager.createNativeQuery()`.
+
+_Parameter Binding_:
+
+The parameters are bound to the query using the names provided in the @Param annotations or positionally if no @Param annotations are used.
+
+_Execution and Result Mapping_:
+
+The query is executed, and the results are fetched.
+
+The JPA provider (like Hibernate) maps the result set to the entity or DTO (Data Transfer Object) specified by the method's return type.
