@@ -95,7 +95,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
 **_How It Works Internally_**
 
-_Annotation Parsing_: When Spring Data JPA initializes the EmployeeRepository bean, it scans for repository interfaces and detects methods annotated with @Query.
+_Annotation Parsing_: When Spring Data JPA initializes the EmployeeRepository bean, it scans for repository interfaces and detects methods annotated with `@Query`.
 
 _Query Translation_:
 
