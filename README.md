@@ -3,7 +3,7 @@ This is a documentation to understand Spring Data Jpa.
 
 Spring Data JPA is a part of the larger Spring Data family, which aims to simplify the development of data access layers in Java applications. It builds on top of the Java Persistence API (JPA) and offers a higher-level abstraction for interacting with databases, reducing boilerplate code and enhancing productivity.
 
-**Core Components of Spring Data JPA**
+**_Core Components of Spring Data JPA_**
 
 1. **Repositories**:
 
@@ -23,7 +23,7 @@ _Custom Query Methods_: Developers can use the `@Query` annotation to define cus
 
 _Query DSL_: Spring Data JPA also supports Query DSL for building type-safe queries programmatically.
 
-**How Spring Data JPA Works Internally**
+**_How Spring Data JPA Works Internally_**
 
 _Bootstrapping_:
 
@@ -60,7 +60,7 @@ Spring Data JPA abstracts much of the complexity involved in data access, allowi
 
 ---
 
-In Spring Data JPA, the `@Query` annotation is used to define custom `JPQL` (Java Persistence Query Language) or `native SQL` queries directly on repository methods. This is especially useful when the method name query derivation isn't sufficient for your needs.
+In _Spring Data JPA_, the `@Query` annotation is used to define custom `JPQL` (Java Persistence Query Language) or `native SQL` queries directly on repository methods. This is especially useful when the method name query derivation isn't sufficient for your needs.
 
 Here's an example of how to use the `@Query` annotation in a Spring Data JPA repository and a brief explanation of its internal working:
 
@@ -93,7 +93,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 }
 ````
 
-**How It Works Internally**
+**_How It Works Internally_**
 
 _Annotation Parsing_: When Spring Data JPA initializes the EmployeeRepository bean, it scans for repository interfaces and detects methods annotated with @Query.
 
@@ -107,7 +107,7 @@ _Parameter Binding_: The parameters provided to the method are bound to the quer
 
 _Query Execution_: The query is executed, and the result is returned. The result is automatically mapped to the domain model (in this case, the `Employee` entity).
 
-**Internals of Query Execution**
+**_Internals of Query Execution_**
 
 Spring Data JPA leverages the underlying JPA provider (like Hibernate) to handle the actual query execution. The high-level flow looks like this:
 
@@ -115,7 +115,6 @@ _Query Preparation_:
 
 The repository infrastructure creates a QueryMethod instance for each method annotated with `@Query`.
 This instance encapsulates the metadata about the query, such as the JPQL/SQL string, method parameters, and return type.
-
 
 _Query Creation_:
 
