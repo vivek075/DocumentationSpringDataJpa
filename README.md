@@ -27,7 +27,7 @@ _Query DSL_: Spring Data JPA also supports Query DSL for building type-safe quer
 
 _Bootstrapping_:
 
-When the application context starts, Spring scans the classpath for repository interfaces and entity classes. This process is usually initiated by an annotation like @EnableJpaRepositories.
+When the application context starts, Spring scans the classpath for repository interfaces and entity classes. This process is usually initiated by an annotation like `@EnableJpaRepositories`.
 Spring Data JPA automatically creates proxy instances for repository interfaces using Java's Proxy or CGLIB library.
 
 _Repository Proxy Creation_:
