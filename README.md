@@ -58,6 +58,8 @@ Spring Data JPA supports auditing features such as tracking entity creation and 
 
 Spring Data JPA abstracts much of the complexity involved in data access, allowing developers to focus on business logic. By handling boilerplate code for CRUD operations, query generation, and transaction management, it streamlines the process of interacting with databases and ensures consistency and maintainability in Java applications.
 
+---
+
 In Spring Data JPA, the `@Query` annotation is used to define custom `JPQL` (Java Persistence Query Language) or `native SQL` queries directly on repository methods. This is especially useful when the method name query derivation isn't sufficient for your needs.
 
 Here's an example of how to use the `@Query` annotation in a Spring Data JPA repository and a brief explanation of its internal working:
